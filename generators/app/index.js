@@ -3,24 +3,29 @@ var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
 
-module.exports = yeoman.generators.Base.extend({
+var expressive = yeoman.generators.Base.extend({
   prompting: function () {
     var done = this.async();
 
     // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the ' + chalk.red('Expressive') + ' generator!'
+      'Be ' + chalk.red('Expressive.')
     ));
 
-    var prompts = [{
-      type: 'confirm',
-      name: 'someOption',
-      message: 'Would you like to enable this option?',
-      default: true
-    }];
+    var prompts = [
+      {
+        name: 'authorName',
+        message: 'What is your name?'
+      },
+      {
+        name: 'projectName',
+        message: 'What is the name of your project?'
+      }
+    ];
 
     this.prompt(prompts, function (props) {
-      this.props = props;
+      this.authorName = props.authorName;
+      this.projectName = props.projectName;
       // To access props later use this.props.someOption;
 
       done();
@@ -30,12 +35,24 @@ module.exports = yeoman.generators.Base.extend({
   writing: {
     app: function () {
       this.fs.copy(
+        this.templatePath('_index.html'),
+        this.destinationPath('public/index.html')
+      );
+      this.fs.copy(
+        this.templatePath('_main.scss'),
+        this.destinationPath('scss/main.scss')
+      );
+      this.fs.copy(
         this.templatePath('_package.json'),
         this.destinationPath('package.json')
       );
       this.fs.copy(
-        this.templatePath('_bower.json'),
-        this.destinationPath('bower.json')
+        this.templatePath('_gulpfile.js'),
+        this.destinationPath('gulpfile.js')
+      );
+      this.fs.copy(
+        this.templatePath('_server.js'),
+        this.destinationPath('server.js')
       );
     },
 
@@ -48,10 +65,17 @@ module.exports = yeoman.generators.Base.extend({
         this.templatePath('jshintrc'),
         this.destinationPath('.jshintrc')
       );
+      this.fs.copy(
+        this.templatePath('gitignore'),
+        this.destinationPath('.gitignore')
+      );
     }
   },
 
   install: function () {
-    this.installDependencies();
+    this.npmInstall([ 'gulp', 'gulp-sass', 'gulp-plumber', 'gulp-autoprefixer', 'browser-sync'], {saveDev: true });
+    this.npmInstall(['express'], { save: true });
   }
 });
+
+module.exports = expressive;
