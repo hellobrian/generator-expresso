@@ -1,4 +1,4 @@
-# generator-expresso [![Build Status](https://secure.travis-ci.org/thisisbrianhan/generator-expressive.png?branch=master)](https://travis-ci.org/thisisbrianhan/generator-expressive)
+# generator-expresso [![Build Status](https://secure.travis-ci.org/thisisbrianhan/generator-expresso.png?branch=master)](https://travis-ci.org/thisisbrianhan/generator-expresso)
 
 > [Yeoman](http://yeoman.io) generator
 
@@ -23,16 +23,16 @@ npm install -g yo
 
 Yeoman travels light. He didn't pack any generators when he moved in. You can think of a generator like a plug-in. You get to choose what type of application you wish to create, such as a Backbone application or even a Chrome extension.
 
-To install generator-expressive from npm, run:
+To install generator-expresso from npm, run:
 
 ```bash
-npm install -g generator-expressive
+npm install -g generator-expresso
 ```
 
 Finally, initiate the generator:
 
 ```bash
-yo expressive
+yo expresso
 ```
 
 ### Getting To Know Yeoman
