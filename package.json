@@ -1,10 +1,10 @@
 {
-  "name": "generator-expressive",
+  "name": "generator-expresso",
   "version": "0.0.0",
   "description": "Yeoman generator",
   "license": "MIT",
   "main": "app/index.js",
-  "repository": "thisisbrianhan/generator-expressive",
+  "repository": "thisisbrianhan/generator-expresso",
   "author": {
     "name": "Brian Han",
     "url": "https://github.com/thisisbrianhan"

@@ -1,4 +1,4 @@
-# generator-expressive [![Build Status](https://secure.travis-ci.org/thisisbrianhan/generator-expressive.png?branch=master)](https://travis-ci.org/thisisbrianhan/generator-expressive)
+# generator-expresso [![Build Status](https://secure.travis-ci.org/thisisbrianhan/generator-expressive.png?branch=master)](https://travis-ci.org/thisisbrianhan/generator-expressive)
 
 > [Yeoman](http://yeoman.io) generator
 

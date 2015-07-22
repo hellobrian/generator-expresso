@@ -3,13 +3,13 @@ var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
 
-var expressive = yeoman.generators.Base.extend({
+var expresso = yeoman.generators.Base.extend({
   prompting: function () {
     var done = this.async();
 
     // Have Yeoman greet the user.
     this.log(yosay(
-      'Be ' + chalk.red('Expressive.')
+      chalk.red('Expresso Time.')
     ));
 
     var prompts = [
@@ -34,48 +34,30 @@ var expressive = yeoman.generators.Base.extend({
 
   writing: {
     app: function () {
-      this.fs.copy(
-        this.templatePath('_index.html'),
-        this.destinationPath('public/index.html')
-      );
-      this.fs.copy(
-        this.templatePath('_main.scss'),
-        this.destinationPath('scss/main.scss')
-      );
-      this.fs.copy(
-        this.templatePath('_package.json'),
-        this.destinationPath('package.json')
-      );
-      this.fs.copy(
-        this.templatePath('_gulpfile.js'),
-        this.destinationPath('gulpfile.js')
-      );
-      this.fs.copy(
-        this.templatePath('_server.js'),
-        this.destinationPath('server.js')
-      );
+      this.template('_index.html', 'public/index.html');
+      this.template('_package.json', 'package.json');
+      this.copy('_main.scss', 'scss/main.scss');
+      this.copy('_gulpfile.js', 'gulpfile.js');
+      this.copy('_server.js', 'server.js');
     },
 
     projectfiles: function () {
-      this.fs.copy(
-        this.templatePath('editorconfig'),
-        this.destinationPath('.editorconfig')
-      );
-      this.fs.copy(
-        this.templatePath('jshintrc'),
-        this.destinationPath('.jshintrc')
-      );
-      this.fs.copy(
-        this.templatePath('gitignore'),
-        this.destinationPath('.gitignore')
-      );
+      this.copy('editorconfig', '.editorconfig');
+      this.copy('jshintrc', '.jshintrc');
+      this.copy('gitignore', '.gitignore');
     }
   },
 
   install: function () {
     this.npmInstall([ 'gulp', 'gulp-sass', 'gulp-plumber', 'gulp-autoprefixer', 'browser-sync'], {saveDev: true });
     this.npmInstall(['express'], { save: true });
+  },
+
+  end: function () {
+    this.log('\n');
+    this.log('\n$ npm run dev');
+    this.log('\n');
   }
 });
 
-module.exports = expressive;
+module.exports = expresso;
