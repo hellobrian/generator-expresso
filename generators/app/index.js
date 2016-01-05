@@ -1,17 +1,30 @@
 'use strict';
 
-var yeoman = require('yeoman-generator');
-var chalk = require('chalk');
-var yosay = require('yosay');
+const yeoman = require('yeoman-generator');
+const chalk = require('chalk');
+const yosay = require('yosay');
+
+const introMessage = () => {
+  console.log(
+    `
+    [Expresso]
+
+    A generator for scaffolding a simple express app:
+
+    * Nunjucks
+    * SCSS
+    * Gulp
+    * Mocha
+    * a11y
+    `
+  );
+}
 
 var expresso = yeoman.generators.Base.extend({
   prompting: function () {
     var done = this.async();
 
-    // Have Yeoman greet the user.
-    this.log(yosay(
-      chalk.red('Expresso Time.')
-    ));
+    introMessage();
 
     var prompts = [
       {
@@ -67,9 +80,16 @@ var expresso = yeoman.generators.Base.extend({
   },
 
   end: function () {
-    this.log('\n');
-    this.log('\n$ npm run dev');
-    this.log('\n');
+    this.log(`
+
+      Expresso has successfully completed your express scaffold!
+
+      Run the app:
+      $ npm run dev
+
+      Then visit http://localhost:3000
+
+      `);
   }
 });
 
