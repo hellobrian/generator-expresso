@@ -54,6 +54,7 @@ var expresso = yeoman.generators.Base.extend({
       this.copy('gulpfile.js', 'gulpfile.js');
       this.copy('server.js', 'server.js');
       this.copy('bin/www', 'bin/www');
+      this.copy('tests/routes.js', 'tests/routes.js');
     },
 
     projectfiles: function () {
