@@ -1,16 +1,19 @@
 {
   "name": "generator-expresso",
   "version": "0.0.1",
-  "description": "Yeoman generator",
+  "description": "Yeoman generator for scaffolding express apps",
   "license": "MIT",
   "main": "app/index.js",
-  "repository": "thisisbrianhan/generator-expresso",
+  "repository": "hellobrian/generator-expresso",
   "author": {
     "name": "Brian Han",
-    "url": "https://github.com/thisisbrianhan"
+    "url": "https://github.com/hellobrian"
   },
   "scripts": {
     "test": "mocha"
+  },
+  "engines": {
+    "node": ">=4.0.0"
   },
   "files": [
     "generators"
