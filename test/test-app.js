@@ -5,6 +5,18 @@ var assert = require('yeoman-generator').assert;
 var helpers = require('yeoman-generator').test;
 var os = require('os');
 
+var files = [
+  'package.json',
+  '.editorconfig',
+  '.gitignore',
+  '.sass-lint.yml',
+  'server.js',
+  'gulpfile.js',
+  'bin/www',
+  'scss/main.scss',
+  'views/index.html'
+]
+
 describe('expressive:app', function () {
   before(function (done) {
     helpers.run(path.join(__dirname, '../generators/app'))
@@ -14,10 +26,6 @@ describe('expressive:app', function () {
   });
 
   it('creates files', function () {
-    assert.file([
-      'package.json',
-      '.editorconfig',
-      '.jshintrc'
-    ]);
+    assert.file(files);
   });
 });

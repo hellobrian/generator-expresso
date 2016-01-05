@@ -1,11 +1,22 @@
-var express = require('express');
-var port = process.env.PORT || 3000;
-var app = express();
+'use strict';
 
-app.use(express.static(__dirname + '/public'));
+const express = require('express');
+const logger = require('morgan');
+const nunjucks = require('express-nunjucks');
+const path = require('path');
+const app = express();
 
-app.get('/', function (req, res) {
-  res.sendFile('index.html');
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('view engine', 'html');
+app.use(logger('dev'));
+
+nunjucks.setup({
+  autoescape: true,
+  watch: true
+}, app);
+
+app.get('/', (req, res) => {
+  res.render('index');
 });
 
-app.listen(port);
+module.exports = app;

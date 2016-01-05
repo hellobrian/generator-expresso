@@ -34,23 +34,24 @@ var expresso = yeoman.generators.Base.extend({
 
   writing: {
     app: function () {
-      this.template('_index.html', 'public/index.html');
+      this.template('_index.html', 'views/index.html');
       this.template('_package.json', 'package.json');
       this.copy('_main.scss', 'scss/main.scss');
       this.copy('_gulpfile.js', 'gulpfile.js');
       this.copy('_server.js', 'server.js');
+      this.copy('_www', 'bin/www');
+      this.copy('_sass-lint.yml', '.sass-lint.yml');
     },
 
     projectfiles: function () {
       this.copy('editorconfig', '.editorconfig');
-      this.copy('jshintrc', '.jshintrc');
       this.copy('gitignore', '.gitignore');
     }
   },
 
   install: function () {
     this.npmInstall([ 'gulp', 'gulp-sass', 'gulp-plumber', 'gulp-autoprefixer', 'browser-sync'], {saveDev: true });
-    this.npmInstall(['express'], { save: true });
+    this.npmInstall(['express', 'express-nunjucks', 'morgan'], { save: true });
   },
 
   end: function () {

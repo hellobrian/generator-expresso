@@ -1,45 +1,112 @@
-var gulp = require('gulp'),
-    sass = require('gulp-sass'),
-    autoprefixer = require('gulp-autoprefixer'),
-    browserSync = require('browser-sync'),
-    plumber = require('gulp-plumber'),
-    reload = browserSync.reload
-    ;
+'use strict';
 
-var AUTOPREFIXER_BROWSERS = [
-  'ie >= 10',
-  'ie_mob >= 10',
-  'ff >= 30',
-  'chrome >= 34',
-  'Safari >= 7',
-  'Opera >= 23',
-  'iOS >= 7',
-  'ChromeAndroid >= 4.4',
-  'bb >= 10'
-];
+const gulp = require('gulp');
+const browserSync = require('browser-sync').create();
+const nodemon = require('gulp-nodemon');
+const runSequence = require('run-sequence');
+const mocha = require('gulp-mocha');
+const sass = require('gulp-sass');
+const autoprefixer = require('gulp-autoprefixer');
+const sourcemaps = require('gulp-sourcemaps');
+const del = require('del');
+const a11y = require('gulp-a11y');
 
-var SOURCE = {
-  scss: 'scss/**/*.scss',
-  css: 'public/css',
-  html: 'public/*.html'
+///////////////////////////
+// File Paths
+///////////////////////////
+
+const PATHS = {
+  test: 'tests/*.js',
+  clean: 'public/**/*.{css,js}',
+  server: [
+    'server.js',
+    'bin/www'
+  ],
+  sass: 'scss/**/*.scss',
+  html: [
+    'views/*.html',
+    'views/**/*.html'
+  ]
 }
 
-gulp.task('sass', function () {
-  gulp.src(SOURCE.scss)
-  .pipe(plumber())
-  .pipe(sass())
-  .pipe(autoprefixer({ browsers: AUTOPREFIXER_BROWSERS }))
-  .pipe(gulp.dest(SOURCE.css))
-  .pipe(reload({ stream: true }))
-  ;
+///////////////////////////
+// Tests
+///////////////////////////
+
+gulp.task('test:mocha', () => {
+  return gulp.src(PATHS.test, { read: false })
+    .pipe(mocha({ reporter: 'spec' }));
 });
 
-gulp.task('browser-sync', function() {
-  browserSync({
-    proxy: "localhost:3000"
-  })
+gulp.task('test:a11y', () => {
+  return gulp.src(PATHS.html)
+    .pipe(a11y())
+    .pipe(a11y.reporter());
+});
+
+gulp.task('test', ['test:mocha', 'test:a11y']);
+
+
+///////////////////////////
+// Browser-Sync + Nodemon
+///////////////////////////
+
+gulp.task('browser-sync', () => {
+  browserSync.init({
+    logPrefix: 'brianhan.io',
+    open: false,
+    proxy: 'localhost:8080',
+    port: 3000
+  });
+});
+
+gulp.task('nodemon', () => {
+  return nodemon({
+    script: './bin/www',
+    ext: 'js html',
+    env: { 'NODE_ENV': 'development' }
+  });
+});
+
+process.once('SIGINIT', () => {
+  process.exit(0);
+});
+
+///////////////////////////
+// Clean
+///////////////////////////
+
+gulp.task('clean', () => {
+  return del(PATHS.clean);
 })
 
-gulp.task('watch-sass', ['sass', 'browser-sync'], function () {
-  gulp.watch(SOURCE.scss, ['sass']);
+///////////////////////////
+// Styles
+///////////////////////////
+
+gulp.task('sass', () => {
+  return gulp.src(PATHS.sass)
+    .pipe(sourcemaps.init())
+    .pipe(sass().on('error', sass.logError))
+    .pipe(autoprefixer({
+      browsers: ['> 1%', 'last 2 versions']
+    }))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('public/styles'))
+    .pipe(browserSync.stream());
+});
+
+///////////////////////////
+// Running Tasks
+///////////////////////////
+
+gulp.task('build', () => {
+  runSequence('clean', ['sass']);
+});
+
+gulp.task('default', () => {
+  runSequence('build', 'nodemon', 'browser-sync', 'test');
+  gulp.watch(PATHS.sass, ['sass']);
+  gulp.watch(PATHS.server, ['test']);
+  gulp.watch(PATHS.html, ['test']).on('change', browserSync.reload);
 });
