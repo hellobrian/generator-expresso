@@ -50,7 +50,18 @@ var expresso = yeoman.generators.Base.extend({
   },
 
   install: function () {
-    this.npmInstall([ 'gulp', 'gulp-sass', 'gulp-plumber', 'gulp-autoprefixer', 'browser-sync'], {saveDev: true });
+    this.npmInstall([
+      'gulp',
+      'gulp-sass',
+      'gulp-nodemon',
+      'gulp-autoprefixer',
+      'browser-sync',
+      'run-sequence',
+      'gulp-mocha',
+      'gulp-sourcemaps',
+      'del',
+      'gulp-a11y'
+    ], {saveDev: true });
     this.npmInstall(['express', 'express-nunjucks', 'morgan'], { save: true });
   },
 
