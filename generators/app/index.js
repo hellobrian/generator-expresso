@@ -75,7 +75,9 @@ var expresso = yeoman.generators.Base.extend({
       'gulp-mocha',
       'gulp-sourcemaps',
       'del',
-      'gulp-a11y'
+      'gulp-a11y',
+      'mocha',
+      'supertest'
     ], {saveDev: true });
     this.npmInstall(['express', 'express-nunjucks', 'morgan'], { save: true });
   },
