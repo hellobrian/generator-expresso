@@ -1,4 +1,5 @@
 'use strict';
+
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
@@ -34,18 +35,18 @@ var expresso = yeoman.generators.Base.extend({
 
   writing: {
     app: function () {
-      this.template('_index.html', 'views/index.html');
-      this.template('_package.json', 'package.json');
-      this.copy('_main.scss', 'scss/main.scss');
-      this.copy('_gulpfile.js', 'gulpfile.js');
-      this.copy('_server.js', 'server.js');
-      this.copy('_www', 'bin/www');
-      this.copy('_sass-lint.yml', '.sass-lint.yml');
+      this.template('views/index.html', 'views/index.html');
+      this.template('package.json', 'package.json');
+      this.copy('scss/main.scss', 'scss/main.scss');
+      this.copy('gulpfile.js', 'gulpfile.js');
+      this.copy('server.js', 'server.js');
+      this.copy('bin/www', 'bin/www');
     },
 
     projectfiles: function () {
-      this.copy('editorconfig', '.editorconfig');
-      this.copy('gitignore', '.gitignore');
+      this.copy('.editorconfig', '.editorconfig');
+      this.copy('.gitignore', '.gitignore');
+      this.copy('.sass-lint.yml', '.sass-lint.yml');
     }
   },
 
