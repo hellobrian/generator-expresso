@@ -1,4 +1,4 @@
-# generator-expresso [![Build Status](https://secure.travis-ci.org/thisisbrianhan/generator-expresso.png?branch=master)](https://travis-ci.org/thisisbrianhan/generator-expresso)
+# generator-expresso [![build-status](https://travis-ci.org/hellobrian/generator-expresso.svg?branch=master)](https://travis-ci.org/hellobrian/generator-expresso)
 
 > [Yeoman](http://yeoman.io) generator
 
