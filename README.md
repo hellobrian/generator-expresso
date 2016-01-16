@@ -1,4 +1,4 @@
-# generator-expresso [![build-status](https://travis-ci.org/hellobrian/generator-expresso.svg?branch=master)](https://travis-ci.org/hellobrian/generator-expresso)
+# generator-expresso [![build-status](https://travis-ci.org/hellobrian/generator-expresso.svg?branch=master)](https://travis-ci.org/hellobrian/generator-expresso) [![npm version](https://badge.fury.io/js/generator-expresso.svg)](https://badge.fury.io/js/generator-expresso)
 
 > [Yeoman](http://yeoman.io) generator
 
