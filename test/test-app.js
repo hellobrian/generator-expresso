@@ -17,7 +17,7 @@ var files = [
   'views/index.html'
 ]
 
-describe('expressive:app', function () {
+describe('expresso:app', function () {
   before(function (done) {
     helpers.run(path.join(__dirname, '../generators/app'))
       .withOptions({ skipInstall: true })
